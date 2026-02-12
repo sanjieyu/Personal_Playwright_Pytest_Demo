@@ -21,14 +21,14 @@ def credentials(config_reader):
 def base_url(credentials):
     return credentials["egd_url"]
 
-def pytest_sessionfinish(session, exitstatus):
-    try:
-        from CommonModule.send_report import ReportSender
-        sender = ReportSender()
-        sender.send_email(report_path="Report/report.html")
-    except ModuleNotFoundError:
-        print("\n[Error] Can't send report：CommonModule.send_report module missing")
-    except Exception as e:
-        print(f"\n[Error] Failed to send report: {e}")
+# def pytest_sessionfinish(session, exitstatus):
+#     try:
+#         from CommonModule.send_report import ReportSender
+#         sender = ReportSender()
+#         sender.send_email(report_path="Report/report.html")
+#     except ModuleNotFoundError:
+#         print("\n[Error] Can't send report：CommonModule.send_report module missing")
+#     except Exception as e:
+#         print(f"\n[Error] Failed to send report: {e}")
 
 

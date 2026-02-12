@@ -32,8 +32,20 @@ def browser_context_args(browser_context_args, credentials):
 @pytest.fixture(scope="session", autouse=True)
 def auto_login_setup(browser, credentials):
 
+    should_login = False
     if not os.path.exists(AUTH_PATH):
+        should_login = True
         print("\n[Auth] Can't find auth.json，run login...")
+
+    else:
+        # Re-authenticate if the token/file is expired (over 24 hours).
+        file_age = time.time() - os.path.getmtime(AUTH_PATH)
+        if file_age > 86400:    # 24 hours
+            print("\n[Auth] auth.json is expired (over 24 hours),prpare to re-login...")
+            should_login = True
+
+    if should_login:
+        print("\n[Auth] start to login from UI...")
         context = browser.new_context()
         page = context.new_page()
 
