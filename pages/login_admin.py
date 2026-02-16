@@ -6,7 +6,7 @@
 class Admin_Portal():
     username_loc = 'xpath=//*[@id="Email"]'
     password_loc = 'xpath=//*[@id="Password"]'
-    login_loc = 'xpath=//*[@id="loginForm"]/form/div[4]/div/input'
+    login_loc = 'xpath=//*[@id="loginForm"]/form/'
 
     def __init__(self,page):
         self.page = page

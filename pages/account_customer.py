@@ -9,20 +9,21 @@ class Account_Customer(Admin_Page):
 
     def __init__(self,page:Page):
         super().__init__(page)
-        self.url_path = "Customer/List"
+        self.url_path = "test_sample"
         self._init_locators_account_customer()
 
+    """
+        Note: For security and confidentiality, specific XPath/CSS selectors
+        have been replaced with 'test_sample', and additional private locators
+        have been omitted from this public sample.
+    """
     def _init_locators_account_customer(self):
         '''loc for default values in this page'''
-        self.account_title_loc = self.page.locator('h1.header')
-        self.account_searchbtn_loc = self.page.locator('button.btn-primary')
-        self.account_searchbox_loc = self.page.locator('#searchCustomerName')
-        self.customer_name_loc = self.page.locator("xpath=//span[text()='Customer Name']")
-        self.contact_name_loc = self.page.locator("xpath=//span[text()='Contact Name']")
-        self.address_loc = self.page.locator("xpath=//span[text()='Address']")
-        self.email_loc = self.page.locator("xpath=//span[text()='Email']")
-        self.suburb_loc = self.page.locator("xpath=//span[text()='Suburb']")
-        self.search_result_name_loc = self.page.locator("a[href*='/Customer/Edit/']")
+        self.account_title_loc = self.page.locator('test_sample')
+        self.account_searchbtn_loc = self.page.get_by_role("button", name="test_sample")
+        self.account_searchbox_loc = self.page.get_by_text("test_sample")
+        self.account_search_loc = self.page.get_by_label("test_sample")
+
 
     def goto_account_customer(self):
         '''Go to account customer screen'''
@@ -40,7 +41,6 @@ class Account_Customer(Admin_Page):
     def check_accountcustomer_title(self):
         '''Check the url'''
         acocount_customer_title = self.account_title_loc.inner_text()
-        print('title is:',acocount_customer_title)
         return acocount_customer_title
 
     @property
@@ -48,10 +48,8 @@ class Account_Customer(Admin_Page):
         '''Check the search button'''
         account_btn = self.account_searchbtn_loc
         if account_btn.is_enabled():
-            print('is there')
             return True
         else:
-            print('is missing')
             return False
 
     @property
@@ -59,10 +57,8 @@ class Account_Customer(Admin_Page):
         '''Check the search box'''
         account_box = self.account_searchbox_loc
         if account_box.is_visible():
-            print('is there')
             return True
         else:
-            print('is missing')
             return False
 
     @property
@@ -73,18 +69,15 @@ class Account_Customer(Admin_Page):
         address = self.address_loc.inner_text()
         email = self.email_loc.inner_text()
         suburb = self.suburb_loc.inner_text()
-        print(customer_name,contact_name,address,email,suburb)
         return customer_name,contact_name,address,email,suburb
 
     @property
     def check_search_result(self):
         '''Check the Search function'''
-        self.account_searchbox_loc.fill('tim2')
+        self.account_searchbox_loc.fill('test_sample')
         self.account_searchbtn_loc.click()
-
         self.search_result_name_loc.wait_for()
         search_result_name = self.search_result_name_loc.inner_text()
-        print(search_result_name)
         return search_result_name
 
 
@@ -95,19 +88,13 @@ if __name__ == '__main__':
         browser = p.firefox.launch(headless=False)
         context = browser.new_context(viewport={"width": 2560, "height": 1440}, ignore_https_errors=True)
         page = context.new_page()
-        page.goto("http://xxx/")
+        page.goto("http://test_sample")
         login = Account_Customer(page)
-        login.typeUserName('yxxx')
-        login.typePassword('xxxx')
+        login.typeUserName('test_sample')
+        login.typePassword('test_sample')
         login.clicklogin()
         page.wait_for_timeout(3000)
         login.goto_account_customer()
-        # login.check_accountcustomer_url
-        # login.check_accountcustomer_title
-        # login.check_search_btn
-        # login.check_searchbox
-        # login.check_columns
-        login.check_search_result
 
 
 

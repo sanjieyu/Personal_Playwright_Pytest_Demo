@@ -11,27 +11,23 @@ class Rolling_Cycle_Management(Admin_Page):
         super().__init__(page)
         self._init_locators_rolling_cycle_management()
 
+    """
+        Note: For security and confidentiality, specific XPath/CSS selectors
+        have been replaced with 'test_sample', and additional private locators
+        have been omitted from this public sample.
+    """
+
     def _init_locators_rolling_cycle_management(self):
-        self.rolling_title_loc = self.page.locator("[name='sample']")
+        self.rolling_title_loc = self.page.locator('#test_sample')
+        self.general_settings_loc  = self.page.get_by_text("test_sample")
+        self.colour_cycle_settings_loc = self.page.get_by_label("test_sample")
 
+        # [Remaining 50+ locators redacted for confidentiality]
         '''default section'''
-        self.general_settings_loc  = self.page.locator("[name='sample']")
-        self.colour_cycle_settings_loc = self.page.locator("[name='sample']")
-        self.temp_closed_loc = self.page.locator("[name='sample']")
-        self.history_loc = self.page.locator("[name='sample']")
-
         '''General Settings tab'''
-        self.split_doors_loc = self.page.locator("[name='sample']")
-        self.lockout_settings_loc = self.page.locator("[name='sample']")
-        self.default_shift_settings_loc = self.page.locator("[name='sample']")
-
         '''Colour Cycles Settings screen'''
-        self.coil_settings_loc = self.page.locator('#sample')
-        self.save_coil_btn_loc = self.page.locator('#sample')
-
         '''Temp closed screen'''
-        self.temp_closed_cycles_loc = self.page.locator('#sample')
-        self.update_cycles_btn_loc = self.page.locator('#sample')
+
 
     def go_rolling(self):
         '''Switch to Rolling Cycle Management from Account Menu'''
@@ -44,14 +40,12 @@ class Rolling_Cycle_Management(Admin_Page):
     def check_rolling_url(self):
         '''Check the URL'''
         rolling_url = self.page.url
-        print(rolling_url)
         return  rolling_url
 
     @property
     def check_rolling_title(self):
         '''Check the Title'''
         rolling_title = self.rolling_title_loc.inner_text()
-        print(rolling_title)
         return  rolling_title
 
     @property
@@ -61,7 +55,6 @@ class Rolling_Cycle_Management(Admin_Page):
         colour_cycles_settings_title = self.colour_cycle_settings_loc.inner_text()
         temp_closed_title = self.temp_closed_loc.inner_text()
         history_title = self.history_loc.inner_text()
-        print(general_settings_title,colour_cycles_settings_title,temp_closed_title,history_title)
         return general_settings_title,colour_cycles_settings_title,temp_closed_title,history_title
 
     @property
@@ -70,7 +63,6 @@ class Rolling_Cycle_Management(Admin_Page):
         split_doors = self.split_doors_loc.inner_text()
         lockout_settings = self.lockout_settings_loc.inner_text()
         default_shift_settings = self.default_shift_settings_loc.inner_text()
-        print(split_doors,lockout_settings,default_shift_settings)
         return split_doors,lockout_settings,default_shift_settings
 
     @property
@@ -79,19 +71,7 @@ class Rolling_Cycle_Management(Admin_Page):
         self.colour_cycle_settings_loc.click()
         coil_settings = self.coil_settings_loc.inner_text()
         save_btn = self.save_coil_btn_loc.inner_text()
-        print(coil_settings,save_btn)
         return coil_settings,save_btn
-
-    @property
-    def check_temp_closed(self):
-        '''Check the Temp Closed  screen'''
-        self.temp_closed_loc.click()
-        temp_closed_cycles = self.temp_closed_cycles_loc.inner_text()
-        update_cycles_btn  = self.update_cycles_btn_loc.inner_text()
-        print(temp_closed_cycles,update_cycles_btn)
-        return temp_closed_cycles,update_cycles_btn
-
-
 
 
 if __name__ == '__main__':

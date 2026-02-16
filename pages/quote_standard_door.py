@@ -15,12 +15,10 @@ class Quote_Standard_Door(Add_Standard_Door):
         self._init_locators_quote_standard_door()
 
     def _init_locators_quote_standard_door(self):
-        self.proposal_number_loc = self.page.locator('#ProposalNo')   #get the proposal number for the edit box
-        self.find_quote_input = self.page.locator('#search-quote')
-        self.find_quote_btn = self.page.locator('#search-btn')
-        self.searched_proposal_no_loc = self.page.locator( "a.dark-text[href^='/Quote/Edit/']")
-        self.searched_door_no_loc = self.page.locator("xpath=//span[text()='Door 1(A1)']")
-        self.searched_door_status_loc = self.page.locator("xpath=//span[text()='Quote']")
+        self.proposal_number_loc = self.page.locator('#test_sample')
+        self.find_quote_input = self.page.get_by_text("test_sample")
+        self.find_quote_btn = self.page.get_by_role("button", name="test_sample")
+        self.searched_proposal_no_loc = self.page.get_by_label("test_sample")
 
     def add_door_fun(self):
         self.add_quote1.go_addquote()
@@ -45,7 +43,6 @@ class Quote_Standard_Door(Add_Standard_Door):
         searched_proposal_no = self.searched_proposal_no_loc.inner_text()
         searched_door_no = self.searched_door_no_loc.inner_text()
         searched_door_status = self.searched_door_status_loc.inner_text()
-        print(searched_door_no,searched_door_status)
         return searched_door_no,searched_door_status
 
     def change_to_cash(self):
@@ -60,10 +57,10 @@ if __name__ == '__main__':
         browser = p.chromium.launch(headless=False)
         context = browser.new_context(viewport={"width": 2048, "height": 1152}, ignore_https_errors=True)
         page = context.new_page()
-        page.goto("http://test")
+        page.goto("http://test_sample")
         login = Quote_Standard_Door(page)
-        login.typeUserName('test')
-        login.typePassword('test')
+        login.typeUserName('test_sample')
+        login.typePassword('test_sample')
         login.clicklogin()
         login.add_door_fun()
         prop_no = login.get_proposal_number

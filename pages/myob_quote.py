@@ -9,36 +9,24 @@ class MYOB_Quotes(Admin_Page):
 
     def __init__(self,page:Page):
         super().__init__(page)
-        self.url_path = "Quote/"
+        self.url_path = "test_sample/"
         self._init_locators_myob_quotes()
 
+    """
+        Note: For security and confidentiality, specific XPath/CSS selectors
+        have been replaced with 'test_sample', and additional private locators
+        have been omitted from this public sample.
+    """
     def _init_locators_myob_quotes(self):
-        self.myob_title_loc = self.page.locator("[name='title_myob']")
-        self.search_btn_loc = self.page.locator('#btnMYOBQuoteSearch')
-        self.searched_proposal_loc = self.page.locator('#proposalnumber')
-        self.save_btn_loc = self.page.locator('#saveMYOBListData')
-        self.door_status_dropdown_loc = self.page.locator("//select[contains(@id, '_status')]")
+        self.myob_title_loc = self.page.locator('#test_sample')
+        self.search_btn_loc = self.page.get_by_role("button", name="test_sample")
+        self.searched_proposal_loc = self.page.get_by_text("test_sample")
+        self.save_btn_loc = self.page.get_by_label("test_sample")
 
+        # [Remaining 20+ locators redacted for confidentiality]
         '''client details'''
-        self.client_details_loc = self.page.locator('#sample')
-        self.client_name_loc = self.page.locator('#sample')
-        self.contact_num_loc = self.page.locator('#sample')
-        self.client_name_box_loc = self.page.locator('#ClientName')
-        self.contact_num_box_loc = self.page.locator('#ContactNumber')
-
         '''Location'''
-        self.location_loc = self.page.locator('#sample')
-        self.suburb_loc = self.page.locator('#sample')
-        self.site_address_loc = self.page.locator('#sample')
-        self.suburb_box_loc = self.page.locator('#Suburb')
-        self.site_address_box_loc = self.page.locator('#SiteAddress')
-
         '''Quote Information'''
-        self.quote_info_loc = self.page.locator('#sample')
-        self.proposal_no_loc = self.page.locator('#sample')
-        self.user_loc = self.page.locator('#sample')
-        self.proposal_no_box_loc = self.page.locator('#ProposalNo')
-        self.user_select_loc = self.page.locator('#UserAssignedId')
 
     def go_myob_quotes(self):
         '''Switch to MYOB Quotes page'''
@@ -49,14 +37,12 @@ class MYOB_Quotes(Admin_Page):
     def check_myob_url(self):
         '''Check the URL'''
         myob_quotes_url = self.page.url
-        print(myob_quotes_url)
         return myob_quotes_url
 
     @property
     def check_myob_title(self):
         '''Check the title'''
         myob_quotes_title = self.myob_title_loc.inner_text()
-        print(myob_quotes_title)
         return myob_quotes_title
 
     @property
@@ -68,44 +54,10 @@ class MYOB_Quotes(Admin_Page):
         return client_details,client_name,contact_num
 
     @property
-    def check_location(self):
-        '''Check the Location section'''
-        location = self.location_loc.inner_text()
-        suburb = self.suburb_loc.inner_text()
-        site_address = self.site_address_loc.inner_text()
-        return location,suburb,site_address
-
-    @property
-    def check_quote_info(self):
-        '''Check the Quote Information section'''
-        quote_info = self.quote_info_loc.inner_text()
-        proposal_no = self.proposal_no_loc.inner_text()
-        user = self.user_loc.inner_text()
-        return quote_info,proposal_no,user
-
-    @property
     def check_client_name_box(self):
         '''Check the Client Name box'''
         client_name_box = self.client_name_box_loc
         if client_name_box.is_visible():
-            return True
-        else:
-            return False
-
-    @property
-    def check_contact_num_box(self):
-        '''Check the Contact Number box'''
-        contact_num_box = self.contact_num_box_loc
-        if contact_num_box.is_visible():
-            return True
-        else:
-            return False
-
-    @property
-    def check_suburb_box(self):
-        '''Check the Suburb box'''
-        suburb_box = self.suburb_box_loc
-        if suburb_box.is_visible():
             return True
         else:
             return False
@@ -119,14 +71,6 @@ class MYOB_Quotes(Admin_Page):
         else:
             return False
 
-    @property
-    def check_proposal_no_box(self):
-        '''Check the Proposal No box'''
-        proposal_no_box = self.proposal_no_box_loc
-        if proposal_no_box.is_visible():
-            return True
-        else:
-            return False
 
     @property
     def check_default_user(self):
@@ -134,13 +78,12 @@ class MYOB_Quotes(Admin_Page):
         user_name = self.user_select_loc.evaluate(
             "sel => sel.options[sel.selectedIndex].text"
         )
-        print(user_name)
         return user_name
 
     @property
     def search_myob_fun(self):
         '''Check search function in MYOB by user'''
-        self.user_select_loc.select_option(label="Yi_Account Sun")
+        self.user_select_loc.select_option(label="test_sample")
         search_btn_des = self.search_btn_loc.inner_text()
         self.search_btn_loc.click()
         searched_result = self.searched_proposal_loc.inner_text()
@@ -160,22 +103,10 @@ if __name__ == "__main__":
     with sync_playwright() as p:
         browser = p.firefox.launch(headless=False)
         page = browser.new_page(viewport={"width": 2560, "height": 1440})
-        page.goto("http://test/")
+        page.goto("http://test_sample/")
         login = MYOB_Quotes(page)
-        login.typeUserName('test')
-        login.typePassword('test')
+        login.typeUserName('test_sample')
+        login.typePassword('test_sample')
         login.clicklogin()
         page.wait_for_timeout(3000)
         login.go_myob_quotes()
-        login.check_myob_url
-        login.check_myob_title
-        login.check_client_details
-        login.check_location
-        login.check_quote_info
-        login.check_client_name_box
-        login.check_contact_num_box
-        login.check_suburb_box
-        login.check_site_address_box
-        login.check_proposal_no_box
-        login.check_default_user
-        login.search_myob_fun

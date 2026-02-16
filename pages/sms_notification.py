@@ -11,19 +11,18 @@ class SMS_Notification(Admin_Page):
         super().__init__(page)
         self._init_locators_sms()
 
+    """
+        Note: For security and confidentiality, specific XPath/CSS selectors
+        have been replaced with 'test_sample', and additional private locators
+        have been omitted from this public sample.
+    """
     def _init_locators_sms(self):
-        self.sms_title_loc = self.page.locator("[name='sample']")
-        self.apikey_box_loc =self.page.locator('#APIKEYInput')
-        self.pwd_box_loc = self.page.locator('#PasswordInput')
-        self.from_box_loc = self.page.locator('#FromNumberinput')
+        self.sms_title_loc = self.page.locator('#test_sample')
+        self.apikey_box_loc = self.page.get_by_text("test_sample")
+        self.mlb_tab_loc = self.page.get_by_role("tab", name="test_sample")
 
-        self.mlb_tab_loc = self.page.get_by_role("tab", name="MLB Install")
-        self.syd_tab_loc = self.page.get_by_role("tab", name="SYD Install")
-
+        # [Remaining 10+ locators redacted for confidentiality]
         '''mlb install tab'''
-        self.production_enter_loc = self.page.locator("#MLBInstallTab").get_by_text("Production ENTER")
-        self.production_rollforming_loc = self.page.locator("#MLBInstallTab").get_by_text("Production ROLLFORMING")
-        self.production_qc_loc = self.page.locator("#MLBInstallTab").get_by_text("Production QC")
 
     def go_sms_notification(self):
         '''Switch to SMS Notification Page from Account Menu'''
@@ -84,29 +83,7 @@ class SMS_Notification(Admin_Page):
         '''Check the tab screen'''
         mlb_tab = self.mlb_tab_loc.inner_text()
         syd_tab = self.syd_tab_loc.inner_text()
-        print(mlb_tab,syd_tab)
         return mlb_tab,syd_tab
-
-    @property
-    def check_mlb_enter(self):
-        '''Check the Production Enter in MLB-Install tab screen'''
-        production_enter = self.production_enter_loc.inner_text()
-        print(production_enter)
-        return production_enter
-
-    @property
-    def check_mlb_rollforming(self):
-        '''Check the Production Rollforming in MLB-Install tab screen'''
-        production_rollforming = self.production_rollforming_loc.inner_text()
-        print(production_rollforming)
-        return production_rollforming
-
-    @property
-    def check_mlb_qcpass(self):
-        '''Check the Production QC Pass in MLB-Install tab screen'''
-        production_qcpass = self.production_qc_loc.inner_text()
-        print(production_qcpass)
-        return production_qcpass
 
 if __name__ == '__main__':
     from playwright.sync_api import sync_playwright
