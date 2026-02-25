@@ -5,6 +5,7 @@
 import pytest
 from pages.quote_standard_door import *
 
+@pytest.mark.p1
 class Test_Quote_Standard_Door():
 
     def test_quote_standard_door_001(self,quote_standard_door):

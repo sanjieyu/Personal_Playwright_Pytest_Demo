@@ -5,6 +5,7 @@
 import pytest
 from pages.add_service import Add_Service
 
+@pytest.mark.p1
 class Test_Add_Service():
 
     def test_addservice_ui_001(self,add_service):

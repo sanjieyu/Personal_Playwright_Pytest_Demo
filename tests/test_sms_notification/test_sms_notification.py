@@ -5,6 +5,7 @@
 import pytest
 from pages.sms_notification import *
 
+@pytest.mark.p2
 class Test_SMS_Notification( ):
 
     def test_sms_ui_001(self,sms_notification):

@@ -5,6 +5,7 @@
 import pytest
 from pages.change_quote_status import Change_Quote_Status
 
+@pytest.mark.p2
 class Test_Change_Quote_Status():
 
     def test_status_change_ui_001(self,change_quote_status):

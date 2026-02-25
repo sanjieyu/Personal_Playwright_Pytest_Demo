@@ -5,6 +5,7 @@
 import pytest
 from pages.add_quote import Add_Quote
 
+@pytest.mark.p0
 class Test_Add_Quote():
 
     def test_add_quote_001(self, add_quote):

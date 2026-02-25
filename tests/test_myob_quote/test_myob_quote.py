@@ -5,6 +5,7 @@
 import pytest
 from pages.myob_quote import MYOB_Quotes
 
+@pytest.mark.p1
 class Test_MYOB_Quotes():
 
     def test_myob_quotes_ui_001(self,myob_quote):
