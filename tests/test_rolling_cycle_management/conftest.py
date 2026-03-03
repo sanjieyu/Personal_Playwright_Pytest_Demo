@@ -7,7 +7,7 @@ from pages.rolling_cycle_management import Rolling_Cycle_Management
 @pytest.fixture(scope="class")
 def rolling_cycle_management(page_in_class,credentials):
     page_in_class.goto(credentials["egd_url"])
-    page_in_class.wait_for_load_state("networkidle")
+    page_in_class.wait_for_load_state("domcontentloaded")
     rolling_cycle_management_page = Rolling_Cycle_Management(page_in_class)
     try:
         rolling_cycle_management_page.go_rolling()

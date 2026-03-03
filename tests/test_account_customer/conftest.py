@@ -7,7 +7,7 @@ from pages.account_customer import Account_Customer
 def account_customer(page_in_class,credentials):
 
     page_in_class.goto(credentials["egd_url"])
-    page_in_class.wait_for_load_state("networkidle")
+    page_in_class.wait_for_load_state("domcontentloaded")
     customer_page = Account_Customer(page_in_class)
     try:
         customer_page.goto_account_customer()
